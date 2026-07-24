@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>핀테크 모닝 리포트 - 2026-07-24</title>
+<style>
+  :root{
+    --bg:#f6f8fc; --bg2:#eef2fb; --card:#ffffff; --ink:#1f2733; --sub:#5b6675;
+    --line:#e6ebf5; --brand:#4f6ef7; --brand-soft:#eaf0ff; --accent:#ff8a4c;
+    --up:#17a673; --watch:#e0a021; --warn:#e5484d;
+    --badgeA:#7c6cf5; --badgeA-bg:#efeafe; --badgeB:#2aa9c7; --badgeB-bg:#e5f6fb;
+    --badgeC:#e07a3f; --badgeC-bg:#fdeee2; --hi:#fff3cd;
+    --shadow:0 6px 24px rgba(31,39,51,.07); --shadow2:0 2px 8px rgba(31,39,51,.06);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1420; --bg2:#141b2b; --card:#182234; --ink:#e8edf6; --sub:#9aa7bd;
+      --line:#26324a; --brand:#7d94ff; --brand-soft:#1e2b48; --accent:#ff9a5f;
+      --up:#2fd499; --watch:#f0c04a; --warn:#ff6b70;
+      --badgeA:#a99bff; --badgeA-bg:#2a2352; --badgeB:#57cbe6; --badgeB-bg:#123742;
+      --badgeC:#ffab6e; --badgeC-bg:#3a2415; --hi:#4a3f14;
+      --shadow:0 6px 24px rgba(0,0,0,.35); --shadow2:0 2px 8px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+      --bg:#0f1420; --bg2:#141b2b; --card:#182234; --ink:#e8edf6; --sub:#9aa7bd;
+      --line:#26324a; --brand:#7d94ff; --brand-soft:#1e2b48; --accent:#ff9a5f;
+      --up:#2fd499; --watch:#f0c04a; --warn:#ff6b70;
+      --badgeA:#a99bff; --badgeA-bg:#2a2352; --badgeB:#57cbe6; --badgeB-bg:#123742;
+      --badgeC:#ffab6e; --badgeC-bg:#3a2415; --hi:#4a3f14;
+      --shadow:0 6px 24px rgba(0,0,0,.35); --shadow2:0 2px 8px rgba(0,0,0,.3);
+  }
+  :root[data-theme="light"]{
+    --bg:#f6f8fc; --bg2:#eef2fb; --card:#ffffff; --ink:#1f2733; --sub:#5b6675;
+    --line:#e6ebf5; --brand:#4f6ef7; --brand-soft:#eaf0ff; --accent:#ff8a4c;
+    --up:#17a673; --watch:#e0a021; --warn:#e5484d;
+    --badgeA:#7c6cf5; --badgeA-bg:#efeafe; --badgeB:#2aa9c7; --badgeB-bg:#e5f6fb;
+    --badgeC:#e07a3f; --badgeC-bg:#fdeee2; --hi:#fff3cd;
+    --shadow:0 6px 24px rgba(31,39,51,.07); --shadow2:0 2px 8px rgba(31,39,51,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,var(--bg2),var(--bg));color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:920px;margin:0 auto;padding:20px 16px 64px;}
+  header.top{padding:8px 0 4px;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--brand);
+    background:var(--brand-soft);padding:6px 12px;border-radius:999px;}
+  h1{font-size:clamp(24px,5vw,34px);margin:14px 0 6px;letter-spacing:-.02em;}
+  .meta{color:var(--sub);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:6px;}
+  .meta b{color:var(--ink);}
+  .themebtn{float:right;border:1px solid var(--line);background:var(--card);color:var(--sub);
+    border-radius:999px;padding:6px 12px;font-size:12.5px;cursor:pointer;box-shadow:var(--shadow2);}
+  /* summary hero */
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;box-shadow:var(--shadow);margin:18px 0 8px;}
+  .oneline{font-size:clamp(17px,3.4vw,21px);font-weight:800;letter-spacing:-.01em;margin:0 0 4px;}
+  .oneline .em{background:linear-gradient(180deg,transparent 60%,var(--hi) 60%);padding:0 2px;}
+  .temp{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;
+    padding:7px 14px;border-radius:999px;margin-top:12px;}
+  .temp.watch{background:rgba(224,160,33,.14);color:var(--watch);}
+  .dot{width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(224,160,33,.18);}
+  .top3{display:grid;gap:12px;margin-top:16px;}
+  @media(min-width:680px){.top3{grid-template-columns:repeat(3,1fr);}}
+  .t3{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);}
+  .t3 .n{font-weight:900;font-size:13px;color:var(--brand);}
+  .t3 .h{font-weight:800;margin:4px 0 2px;font-size:15px;line-height:1.4;}
+  .t3 .d{font-size:13px;color:var(--sub);}
+  .kw{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .kw span{font-size:12.5px;font-weight:700;padding:6px 11px;border-radius:999px;
+    background:var(--brand-soft);color:var(--brand);border:1px solid var(--line);}
+  /* tabs */
+  nav.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;flex-wrap:wrap;
+    padding:10px 6px;margin:22px -6px 10px;background:linear-gradient(180deg,var(--bg) 70%,transparent);
+    backdrop-filter:blur(6px);}
+  .tab{flex:1 1 auto;min-width:130px;text-align:center;border:1px solid var(--line);background:var(--card);
+    color:var(--sub);padding:11px 10px;border-radius:12px;font-weight:800;font-size:13.5px;cursor:pointer;
+    box-shadow:var(--shadow2);transition:.15s;}
+  .tab .lab{font-size:11px;font-weight:700;opacity:.8;display:block;}
+  .tab.active{color:#fff;border-color:transparent;}
+  .tab[data-t="A"].active{background:var(--badgeA);}
+  .tab[data-t="B"].active{background:var(--badgeB);}
+  .tab[data-t="C"].active{background:var(--badgeC);}
+  .tab[data-t="X"].active{background:var(--brand);}
+  .panel{display:none;animation:fade .3s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .secttl{display:flex;align-items:center;gap:10px;margin:8px 0 4px;font-size:19px;font-weight:900;letter-spacing:-.01em;}
+  .pill{font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px;}
+  .pill.A{background:var(--badgeA-bg);color:var(--badgeA);}
+  .pill.B{background:var(--badgeB-bg);color:var(--badgeB);}
+  .pill.C{background:var(--badgeC-bg);color:var(--badgeC);}
+  .lede{color:var(--sub);font-size:14px;margin:0 0 14px;}
+  /* news card */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow);margin:14px 0;}
+  .card h3{margin:0 0 6px;font-size:17.5px;letter-spacing:-.01em;line-height:1.4;}
+  .flag{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;
+    background:var(--accent);color:#fff;margin-right:6px;vertical-align:middle;}
+  .flag.new{background:var(--warn);}
+  .flag.kr{background:var(--up);}
+  .src{font-size:12.5px;color:var(--sub);margin:2px 0 12px;}
+  .src a{color:var(--brand);text-decoration:none;font-weight:600;}
+  .src a:hover{text-decoration:underline;}
+  .card h4{margin:14px 0 4px;font-size:13px;font-weight:800;color:var(--brand);
+    text-transform:uppercase;letter-spacing:.03em;}
+  .card p{margin:4px 0;font-size:14.5px;}
+  .card ul{margin:4px 0 4px;padding-left:20px;}
+  .card li{margin:3px 0;font-size:14.5px;}
+  mark{background:var(--hi);color:inherit;padding:0 3px;border-radius:3px;font-weight:700;}
+  .num{font-weight:900;color:var(--accent);}
+  .fig{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;}
+  .fig div{flex:1 1 120px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .fig .v{font-size:20px;font-weight:900;letter-spacing:-.02em;}
+  .fig .k{font-size:12px;color:var(--sub);}
+  .pmbox{border-left:4px solid var(--brand);background:var(--brand-soft);border-radius:0 12px 12px 0;
+    padding:10px 14px;margin:12px 0 2px;font-size:14px;}
+  .pmbox b{color:var(--brand);}
+  .connect{background:linear-gradient(135deg,var(--brand-soft),var(--card));border:1px dashed var(--brand);}
+  .idea dt{font-weight:800;color:var(--brand);margin-top:8px;font-size:13.5px;}
+  .idea dd{margin:2px 0 0;font-size:14.5px;}
+  .qbox{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:0 12px 12px 0;padding:16px 18px;font-size:16px;font-weight:700;box-shadow:var(--shadow2);}
+  footer{margin-top:28px;color:var(--sub);font-size:12.5px;text-align:center;line-height:1.7;}
+  .disclaimer{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
+    font-size:12px;color:var(--sub);margin-top:16px;}
+  a.inl{color:var(--brand);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <button class="themebtn" id="themebtn">🌗 테마</button>
+    <span class="kicker">📊 핀테크 모닝 리포트</span>
+    <h1>온체인 금융 주도권 경쟁의 문이 열렸다</h1>
+    <div class="meta">
+      <span>🗓️ 조사 기준일(KST): <b>2026-07-24 (금)</b></span>
+      <span>⏱️ 데이터 기준 시점: <b>UTC 2026-07-23 22:04 / KST 2026-07-24 07:04</b></span>
+    </div>
+  </header>
+
+  <!-- HERO SUMMARY -->
+  <section class="hero">
+    <p class="oneline">오늘의 한 줄 결론 — <span class="em">달러 스테이블코인(Circle·USDC)의 한국 상륙이 본격화되자, 한국은 '원화 스테이블코인 입법 ↔ 예금토큰(CBDC)'이라는 두 갈래 방어선으로 응수한다.</span></p>
+    <div class="temp watch"><span class="dot"></span> 오늘의 시장 온도 : 관찰 (Watch)</div>
+    <p style="font-size:13.5px;color:var(--sub);margin:10px 0 0">제도·인프라·제휴가 빠르게 움직이지만 실거래 볼륨과 수익모델은 아직 초기. 방향은 명확하나 검증 단계.</p>
+
+    <div class="top3">
+      <div class="t3"><div class="n">TOP 1</div><div class="h">Circle, 카카오·토스뱅크와 스테이블코인 MOU</div><div class="d">7/23 서울 'Current Seoul'에서 발표. USDC 결제·송금·정산 레일의 한국 진입 본격화.</div></div>
+      <div class="t3"><div class="n">TOP 2</div><div class="h">한은 '프로젝트 한강' 2단계 — 9월 예금토큰 무기한 실거래 임박</div><div class="d">경남·iM은행 혁신금융 신규 지정, 지갑 한도 1,000만원, 편의점 결제 실증.</div></div>
+      <div class="t3"><div class="n">TOP 3</div><div class="h">DB증권-옵티미즘, 제주 STO·RWA MOU</div><div class="d">증권사發 온체인 토큰증권 사업 구체화. 금융위 7월 중 STO 가이드라인 발표 예정.</div></div>
+    </div>
+
+    <h4 style="color:var(--brand);margin:18px 0 0;font-size:13px">PM이 오늘 알아야 할 키워드</h4>
+    <div class="kw">
+      <span># USDC 한국 상륙</span>
+      <span># 예금토큰(프로젝트 한강)</span>
+      <span># 원화 스테이블코인 입법</span>
+      <span># STO 가이드라인(7월)</span>
+      <span># 온체인 금융 주도권</span>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <nav class="tabs">
+    <button class="tab active" data-t="A"><span class="lab">주제 A</span>블록체인·스테이블코인</button>
+    <button class="tab" data-t="B"><span class="lab">주제 B</span>RWA·토큰증권(STO)</button>
+    <button class="tab" data-t="C"><span class="lab">주제 C</span>CBDC·예금토큰</button>
+    <button class="tab" data-t="X"><span class="lab">연결분석 · PM</span>인사이트</button>
+  </nav>
+
+  <!-- ================= PANEL A ================= -->
+  <section class="panel active" data-p="A">
+    <div class="secttl"><span class="pill A">A</span> 블록체인 &amp; 스테이블코인</div>
+    <p class="lede">달러 스테이블코인 진영(Circle/USDC)이 규제 정비를 무기로 한국을 '차기 성장 시장'으로 지목. 국내 입법은 하반기 재점화.</p>
+
+    <div class="card">
+      <h3><span class="flag new">24H</span><span class="flag kr">KR</span>Circle, 카카오그룹·토스뱅크와 잇단 MOU — USDC의 한국 결제 레일 진입</h3>
+      <div class="src">출처: The Block · Korea Times · Bloomingbit —
+        <a href="https://www.theblock.co/post/409497/circle-partners-with-kakao-toss" target="_blank" rel="noopener">The Block</a> ·
+        <a href="https://www.koreatimes.co.kr/economy/cryptocurrency/20260723/korea-risks-falling-behind-in-digital-asset-adoption-circle-cso" target="_blank" rel="noopener">Korea Times</a> ·
+        <a href="https://en.bloomingbit.io/feed/news/116826" target="_blank" rel="noopener">Bloomingbit</a></div>
+
+      <h4>무엇이 일어났는가</h4>
+      <p>USDC 발행사 Circle이 7/23 서울에서 연 비공개 행사 <mark>'Current Seoul'</mark>에 맞춰 <mark>카카오그룹</mark> 및 <mark>토스뱅크</mark>와 각각 파트너십(MOU)을 체결했다. 카카오와는 결제·국경 간 송금·가맹점 정산·전통금융↔블록체인 연결을, 토스뱅크와는 스테이블코인 인프라와 은행 계좌·법정화폐 결제망 연동을 탐색한다. Circle 임원진은 발표 전날(7/22) 판교에서 카카오 측과 회동했다.</p>
+
+      <h4>핵심 사실과 수치</h4>
+      <div class="fig">
+        <div><div class="v">~70%</div><div class="k">'26 상반기 USDC 스테이블코인 거래 점유율(vs USDT ~25%)</div></div>
+        <div><div class="v">$1.79조</div><div class="k">'26년 6월 월간 조정 거래액(전월 +63%)</div></div>
+        <div><div class="v">7/8</div><div class="k">Circle, OCC 국법 신탁은행 인가 — 첫 연방 인가 발행사</div></div>
+      </div>
+      <p>Circle 최고전략책임자(Dante Disparte)는 "한국은 입법 지연을 오히려 <mark>'세컨드무버(후발주자) 이점'</mark>으로 전환할 수 있다"고 강조. 동시에 "지금 속도를 못 내면 디지털자산 채택에서 뒤처질 위험"이라고 압박.</p>
+
+      <h4>왜 지금 중요한가</h4>
+      <p>단순 홍보 이벤트가 아니라, 규제가 잡히자마자 글로벌 발행사가 국내 <mark>슈퍼앱(카카오)+인터넷은행(토스)</mark>이라는 최적의 분배 채널을 선점하려는 움직임이다. 국내 원화 스테이블코인 법안이 확정되기 전에 '결제 레일 표준'을 달러 코인이 먼저 깔 수 있다는 신호.</p>
+
+      <h4>영향 · 수혜자 · 리스크</h4>
+      <ul>
+        <li><b>수혜:</b> Circle(분배 채널 확보), 카카오페이·토스뱅크(온체인 결제 신사업), 국내 가맹점·크로스보더 송금 수요자</li>
+        <li><b>리스크:</b> 달러 스테이블코인 확산 시 원화 화폐주권·자본유출 우려 → 규제당국의 견제 가능성. MOU 단계로 실제 상용화까지 <span class="num">확인 필요</span></li>
+      </ul>
+
+      <div class="pmbox"><b>PM 시사점 —</b> "발행"이 아니라 "분배(distribution)"가 승부처다. 국내에서 스테이블코인 사업을 설계한다면, 코인 발행 여부보다 <b>어떤 앱·은행 계정·가맹 정산 흐름에 임베드되는가</b>가 핵심 KPI. 카카오·토스가 USDC 연동을 실증하면 원화 코인의 UX 기준선도 여기서 정해진다.</div>
+      <h4>후속 확인 이벤트</h4>
+      <p>① MOU→PoC→상용 전환 시점 ② 규제당국(한은·금융위)의 달러 스테이블코인 국내 유통에 대한 입장 표명 ③ 카카오페이·토스의 실제 파일럿 스펙</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="flag kr">KR</span>원화 스테이블코인 입법 하반기 재시동 — '은행 vs 비은행' 발행 주체 논쟁 격화</h3>
+      <div class="src">출처: 디지털데일리 · 블록미디어 · 이데일리 —
+        <a href="https://www.ddaily.co.kr/page/view/2026071416154311294" target="_blank" rel="noopener">디지털데일리</a> ·
+        <a href="https://www.blockmedia.co.kr/archives/1117098" target="_blank" rel="noopener">블록미디어</a> ·
+        <a href="https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=04083606645514520" target="_blank" rel="noopener">이데일리</a></div>
+      <h4>무엇이 일어났는가</h4>
+      <p>정부·금융위는 하반기 중 (가칭)<mark>디지털자산기본법</mark> 입법을 추진, 원화 스테이블코인을 제도권으로 편입하겠다고 재확인. 이억원 금융위원장은 "연내 기본법 마련, 스테이블코인 제도화 추진"을 공언했고 비트코인 현물 ETF 도입도 지원 대상.</p>
+      <h4>핵심 쟁점</h4>
+      <ul>
+        <li><b>발행 인가제</b> + 발행액 상응 <b>준비자산 보유의무</b> + <b>상환청구권</b> + 공시체계 등 투자자 보호장치</li>
+        <li>최대 쟁점은 <mark>발행 주체</mark>: 한은은 '인가 은행 중심' 선호 → 금융위·업계는 "비은행 혁신 억제" 우려. 은행권은 예금자보호·AML·준비자산 관리능력을 근거로 은행 주도 주장</li>
+      </ul>
+      <h4>왜 지금 중요한가 · PM 시사점</h4>
+      <p>발행 주체 결정은 곧 <b>시장 구조 설계</b>다. 은행 컨소시엄 독점이면 핀테크는 '월렛·정산·부가서비스' 레이어로, 비은행 허용이면 발행 경쟁 레이어로 사업 포지션이 갈린다.</p>
+      <div class="pmbox"><b>PM 시사점 —</b> 법안이 확정되기 전 지금이 '규제 시나리오별 제품 옵션'을 병렬 설계할 시점. 은행 독점/개방 두 케이스 모두에서 살아남는 <b>중립 인프라(정산·컴플라이언스 API)</b> 포지션이 리스크가 가장 낮다.</p></div>
+    </div>
+
+    <div class="card">
+      <h3>글로벌 규제 지형 — GENIUS법 세부규칙 마감, MiCA 집행, 영국 CoP 협의</h3>
+      <div class="src">출처: Bloomberg · Kraken · BVNK —
+        <a href="https://www.bloomberg.com/professional/insights/regulation/july-2026-global-regulatory-brief-stablecoins-ai-governance-and-regulatory-sandboxes/" target="_blank" rel="noopener">Bloomberg</a> ·
+        <a href="https://blog.kraken.com/economic-brief/july-15-2026" target="_blank" rel="noopener">Kraken</a> ·
+        <a href="https://bvnk.com/blog/global-stablecoin-regulations-2026" target="_blank" rel="noopener">BVNK</a></div>
+      <h4>핵심 사실</h4>
+      <ul>
+        <li><b>미국 GENIUS법:</b> 6개 연방기관이 7/18까지 자본·준비금·인가 세부규칙 마무리. OCC <span class="num">$500만</span> 최소자본 하한, FDIC는 "토큰 보유자 예금보험 대상 아님" 명확화. Stripe·Block 등은 '전용자본 확보+스테이블코인 은행 인가' vs '시장 철수' 선택 기로.</li>
+        <li>Tether는 규제 압박 국면. 반면 미국 규제 USDC는 이자(yield) 지급 불가 — Tether는 가능하다는 비대칭 존재.</li>
+        <li><b>영국:</b> 영란은행(BoE) 파운드 시스템 스테이블코인 실무규정(Code of Practice) 협의 9/22 마감, 연내 확정 목표.</li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> "규제 준수 = 비용"이 아니라 <b>진입장벽·해자(moat)</b>가 되는 국면. Circle의 은행 인가처럼, 라이선스 자체가 제품 차별화 요소다. 한국 입법 설계 시 '이자 지급 허용 여부'는 예금토큰·예금과의 경쟁 구도를 좌우하는 핵심 변수.</div>
+    </div>
+  </section>
+
+  <!-- ================= PANEL B ================= -->
+  <section class="panel" data-p="B">
+    <div class="secttl"><span class="pill B">B</span> RWA 기반 토큰증권(STO) 트렌드</div>
+    <p class="lede">글로벌은 '파일럿→상용' 전환기(DTCC·Ondo·BlackRock). 국내는 법 통과 후 하위법규·인프라 정비 + 증권사發 사업화 착수.</p>
+
+    <div class="card">
+      <h3><span class="flag new">최근</span><span class="flag kr">KR</span>DB증권-옵티미즘 재단, 제주 STO·RWA 사업 MOU</h3>
+      <div class="src">출처: Crypto Economy · Bloomingbit —
+        <a href="https://crypto-economy.com/db-securities-and-optimism-foundation-partner-to-build-sto-and-rwa-infrastructure-in-south-korea/" target="_blank" rel="noopener">Crypto Economy</a> ·
+        <a href="https://en.bloomingbit.io/feed/news/116284" target="_blank" rel="noopener">Bloomingbit</a></div>
+      <h4>무엇이 일어났는가</h4>
+      <p>DB증권이 이더리움 L2 <mark>옵티미즘(Optimism) 재단</mark>과 제주 지역 특화 STO·RWA 사업 MOU를 체결. 국내외 STO·RWA 비즈니스 모델을 공동 개발하기로 했다. 국내 증권사가 글로벌 퍼블릭 블록체인 재단과 직접 손잡은 사례라는 점이 주목 포인트.</p>
+      <h4>왜 중요한가 · 영향</h4>
+      <ul>
+        <li>증권사가 '토큰증권 = 신사업'을 넘어 <b>온체인 인프라(퍼블릭 체인) 위에서의 발행·유통</b>을 실험하기 시작. 폐쇄형(허가형) 중심 논의였던 국내 STO에 퍼블릭 체인 옵션이 진입.</li>
+        <li>제주 부동산·관광·인프라 등 <b>지역 RWA</b>를 토큰화 타깃으로 삼으면 지역경제 자금조달과 결합 가능.</li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> STO의 병목은 '발행'이 아니라 <b>유통·유동성·상호운용성</b>이다. 어떤 체인(허가형 vs 퍼블릭)에서 유통되는지가 투자자 접근성과 2차 거래 유동성을 결정한다. MOU 단계이므로 실제 발행 상품·체인 선택 <span class="num">확인 필요</span>.</div>
+    </div>
+
+    <div class="card">
+      <h3><span class="flag kr">KR</span>국내 STO 제도화 — 법은 통과, 진짜 시장은 이제부터 (금융위 7월 가이드라인 예정)</h3>
+      <div class="src">출처: 전자신문 · 법률신문 · 키움 —
+        <a href="https://www.etnews.com/20260707000180" target="_blank" rel="noopener">전자신문</a> ·
+        <a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=215219" target="_blank" rel="noopener">법률신문</a> ·
+        <a href="https://bbn.kiwoom.com/rfBC1351" target="_blank" rel="noopener">키움증권</a></div>
+      <h4>핵심 사실 · 타임라인</h4>
+      <ul>
+        <li>토큰증권 발행·유통 근거인 <mark>자본시장법·전자증권법 개정안</mark>이 <span class="num">2026-01-15</span> 국회 본회의 통과.</li>
+        <li>시행 시점 <mark>2027년 1월</mark> 예정 → 현재 시행령·감독규정, 장외거래중개업 인가, 예탁결제원 총량관리 시스템 구축 병행.</li>
+        <li>금융위, <mark>2026년 7월 중 하위법규 개정안·가이드라인 발표</mark> 목표(5월 협의체 회의 발표) — <b>이번 주 발표 여부가 단기 관전 포인트.</b></li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> "법 통과 = 시장 개막"이 아니다. 실제 사업 타이밍은 <b>하위법규·인가·인프라</b>에 달렸다. 7월 가이드라인이 발행 한도·기초자산 범위·투자자 요건을 어떻게 그리느냐가 상품 설계의 첫 제약조건.</div>
+    </div>
+
+    <div class="card">
+      <h3>글로벌: RWA 온체인 가치 $33.5B — DTCC·Ondo·BlackRock '상용 전환'</h3>
+      <div class="src">출처: Stobox · CryptoRank · crypto.news —
+        <a href="https://www.stobox.io/reports/state-of-rwa-2026" target="_blank" rel="noopener">Stobox 중간보고서</a> ·
+        <a href="https://cryptorank.io/news/feed/d6bff-rwa-tokenization-news-today" target="_blank" rel="noopener">CryptoRank</a></div>
+      <div class="fig">
+        <div><div class="v">$33.5B</div><div class="k">온체인 자유거래 RWA 가치(스테이블코인 제외, '26.7 초)</div></div>
+        <div><div class="v">≈3배</div><div class="k">전년($11.8~14.1B) 대비 성장</div></div>
+        <div><div class="v">50+</div><div class="k">DTCC 토큰화 파일럿 참여 금융사</div></div>
+      </div>
+      <h4>핵심 사실</h4>
+      <ul>
+        <li><b>DTCC</b> 토큰화 증권 결제 파일럿(SEC no-action 근거): Russell 1000·주요 ETF·국채 대상, BlackRock·골드만·JPM·씨티·Circle·Ondo·Ripple 등 참여. 10월 상용화 가능성.</li>
+        <li><b>Ondo Finance</b>: 7/1~2 BlackRock IVV(S&amp;P500 ETF)·마이크론(MU) 주식 토큰화를 이더리움에서 첫 상용 배포('수탁형(custodial)' 모델 — 실주식은 미국 전통 수탁 유지).</li>
+        <li><b>Securitize</b>: NYSE 상장(SECZ), 밸류 $1.25B — 순수 토큰화 기업 첫 IPO.</li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> 글로벌 승부는 '무엇을 토큰화하나'에서 <b>'전통 결제·수탁 인프라와 어떻게 연결하나(custodial model)'</b>로 이동. 국내 STO도 예탁결제원 총량관리와의 접점 설계가 성패를 가른다.</div>
+    </div>
+  </section>
+
+  <!-- ================= PANEL C ================= -->
+  <section class="panel" data-p="C">
+    <div class="secttl"><span class="pill C">C</span> CBDC 글로벌 &amp; 국내 제도화</div>
+    <p class="lede">한국은 소매형 CBDC 대신 '예금토큰(민관 협력)'으로 실거래 승부. 글로벌은 도매·국경간(BIS Agora·mBridge·BRICS)에 무게.</p>
+
+    <div class="card">
+      <h3><span class="flag new">최근</span><span class="flag kr">KR</span>한은 '프로젝트 한강' 2단계 — 9월 예금토큰 무기한 실거래 임박</h3>
+      <div class="src">출처: 파이낸셜뉴스 · 디지털타임스 · 아시아경제 —
+        <a href="https://www.fnnews.com/news/202607200553377160" target="_blank" rel="noopener">파이낸셜뉴스</a> ·
+        <a href="https://www.dt.co.kr/article/12073176" target="_blank" rel="noopener">디지털타임스</a> ·
+        <a href="https://view.asiae.co.kr/article/2026071517484622411" target="_blank" rel="noopener">아시아경제</a></div>
+      <h4>무엇이 일어났는가</h4>
+      <p>한국은행 CBDC 실증 '프로젝트 한강'이 2단계로 확대. 이르면 <mark>9월부터 무기한 실거래</mark>를 목표로 하며, 1단계 "쓸 곳이 없다"는 비판에 대응해 사용처를 대폭 확대한다.</p>
+      <h4>핵심 사실</h4>
+      <ul>
+        <li>참여 은행 7 → <span class="num">9곳</span>으로 확대. 금융위가 <mark>경남은행·iM뱅크</mark>를 혁신금융서비스 신규 지정.</li>
+        <li>지갑 보유 한도 <span class="num">1,000만원</span>, <b>송금 기능</b> 추가, 지문인증·자동전환, 편의점 체인 결제 실증 등 '실생활 결제 인프라' 지향. KB국민·농협 등 참여.</li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> 한국의 실질 노선은 (소매 CBDC가 아니라) <b>은행 예금의 토큰화(예금토큰)</b>다. 즉 한은은 '기반', 민간은행은 '앱·UX·가맹'을 맡는 구조. 스테이블코인과 정면 경쟁하는 '민관 하이브리드 결제수단'의 국내 표준 실험으로 봐야 한다.</div>
+      <h4>후속 확인 이벤트</h4>
+      <p>① 9월 무기한 실거래 실제 개시 여부 ② 가맹점·사용처 커버리지 ③ 원화 스테이블코인 법안과의 역할 분담(대체재냐 보완재냐)</p>
+    </div>
+
+    <div class="card">
+      <h3>글로벌: 도매·국경간이 주전장 — BIS Agora, mBridge, BRICS 브릿지, e-CNY</h3>
+      <div class="src">출처: BIS · Ledger Insights · Business Standard · Atlantic Council —
+        <a href="https://www.bis.org/publ/othp38.htm" target="_blank" rel="noopener">BIS</a> ·
+        <a href="https://www.ledgerinsights.com/india-to-adds-brics-cbdc-bridge-to-2026-agenda-report/" target="_blank" rel="noopener">Ledger Insights</a> ·
+        <a href="https://www.atlanticcouncil.org/cbdctracker/" target="_blank" rel="noopener">Atlantic Council</a></div>
+      <h4>핵심 사실</h4>
+      <ul>
+        <li><b>BIS Project Agora:</b> 주요 7개 중앙은행+민간은행이 <mark>토큰화 예금 ↔ 토큰화 중앙은행 화폐</mark>의 상호운용을 공통 프로그래머블 플랫폼에서 실험. 기술 실증 '26년 진행.</li>
+        <li><b>인도(RBI):</b> '26~27 양자·다자 국경간 CBDC 파일럿 추진, 싱가포르·UAE와 협력. <b>BRICS CBDC 브릿지</b>를 '26 정상회의 의제로 제안(탈달러 지향).</li>
+        <li><b>중국 e-CNY</b> 누적 7조 위안 돌파, mBridge(중·홍콩·UAE·태국·사우디)로 국경간 확대. <b>미국은 GENIUS법으로 연준 소매 CBDC 금지</b> → 민간 스테이블코인에 위임.</li>
+        <li><b>디지털유로:</b> ECB는 '25.10 준비 다음단계 진입 결정, 규제 채택 전제 시 <mark>2029년</mark> 첫 발행 목표(파일럿 '27 중반 가능).</li>
+      </ul>
+      <div class="pmbox"><b>PM 시사점 —</b> 국가별로 <b>세 갈래</b>: (1) 미국=민간 스테이블코인 위임, (2) 중·인도=국가 CBDC로 결제주권·탈달러, (3) 유럽·한국=예금토큰/디지털유로로 중도. 어느 진영과 상호운용할지가 크로스보더 핀테크의 전략 분기점.</div>
+    </div>
+  </section>
+
+  <!-- ================= PANEL X : CONNECT + PM ================= -->
+  <section class="panel" data-p="X">
+    <div class="secttl"><span class="pill" style="background:var(--brand-soft);color:var(--brand)">🔗</span> 연결·비교 분석</div>
+
+    <div class="card connect">
+      <h3>스테이블코인 ↔ CBDC(예금토큰) ↔ 규제: 같은 날 벌어진 '레일 전쟁'</h3>
+      <p>오늘 세 뉴스는 사실 하나의 사건의 세 단면이다.</p>
+      <ul>
+        <li><b>① 공격 —</b> Circle이 카카오·토스뱅크와 손잡고 <b>USDC(달러) 결제 레일</b>을 한국 슈퍼앱·은행에 심으려 한다(7/23).</li>
+        <li><b>② 방어(공공) —</b> 한은은 <b>예금토큰(프로젝트 한강)</b>으로 9월 무기한 실거래를 준비, "민간은행 예금의 토큰화"라는 국산 결제수단을 실증한다.</li>
+        <li><b>③ 방어(제도) —</b> 정부는 <b>원화 스테이블코인 입법</b>을 하반기 재점화, '은행 vs 비은행' 발행권을 두고 시장 구조를 설계 중이다.</li>
+      </ul>
+      <p style="margin-top:8px">즉 한국은 <mark>달러 스테이블코인의 침투에 맞서 '예금토큰(공공 인프라)'과 '원화 스테이블코인(민간 발행)'이라는 두 대응 카드</mark>를 동시에 꺼냈다. 두 카드는 보완재이면서 예산·역할이 겹치는 <b>부분적 대체재</b>이기도 하다 — 이 긴장이 국내 온체인 결제 시장의 핵심 변수다.</p>
+      <div class="fig">
+        <div><div class="v">달러</div><div class="k">Circle USDC — 민간·글로벌·즉시 분배력</div></div>
+        <div><div class="v">공공</div><div class="k">예금토큰 — 한은 신뢰·은행망·규제 안정</div></div>
+        <div><div class="v">원화</div><div class="k">원화 스테이블코인 — 발행주체 미정</div></div>
+      </div>
+    </div>
+
+    <div class="secttl" style="margin-top:22px"><span class="pill" style="background:var(--accent);color:#fff">🎓</span> PM 학습 섹션</div>
+
+    <div class="card">
+      <h4>오늘의 PM 인사이트</h4>
+      <p>오늘의 구조를 <b>문제-고객-가치-수익-규제-경쟁</b>으로 풀면:</p>
+      <ul>
+        <li><b>문제:</b> 국경 간 송금·가맹 정산은 여전히 느리고 비싸며, 국내엔 아직 '온체인 원화 결제수단'이 없다.</li>
+        <li><b>고객:</b> 크로스보더 커머스·송금 이용자, 가맹점(정산 주기 단축 니즈), 온체인 서비스 개발사.</li>
+        <li><b>가치:</b> 즉시·저비용·프로그래머블 결제. 단, <b>신뢰(상환보장)</b>가 핵심 — 그래서 규제·발행주체가 곧 제품 가치.</li>
+        <li><b>수익모델:</b> 발행사는 준비자산 운용수익(이자), 유통·월렛은 결제 수수료·환전 스프레드·B2B API. 규제 USDC가 '이자 불가'인 점은 예금토큰(예금이자)과의 경쟁에서 결정적 변수.</li>
+        <li><b>경쟁구도:</b> 글로벌 발행사(Circle) vs 국내 은행 컨소시엄 vs 빅테크(카카오·토스) vs 중앙은행(예금토큰). 승부처는 '발행'이 아닌 <b>분배 채널 장악</b>.</li>
+      </ul>
+    </div>
+
+    <div class="card idea">
+      <h4>💡 오늘의 사업 아이디어 — "레일 애그리게이터(Stable-Rail Router)"</h4>
+      <dl>
+        <dt>고객</dt><dd>국경 간 결제가 잦은 국내 커머스·PG·송금 사업자, 온체인 결제를 붙이려는 핀테크.</dd>
+        <dt>고객의 문제</dt><dd>USDC(달러)·원화 스테이블코인·예금토큰이 각기 다른 체인·규제·정산 규칙으로 파편화 → 어디에 붙일지, 규제 리스크는 어떤지 판단·연동 부담이 크다.</dd>
+        <dt>핵심 해결책</dt><dd>여러 스테이블코인·예금토큰 레일을 하나의 API로 추상화하고, 규제·수수료·정산속도·상환보장 기준으로 <b>최적 경로를 자동 라우팅</b>하는 미들웨어(+컴플라이언스·여행규칙(Travel Rule) 내장).</dd>
+        <dt>수익모델</dt><dd>거래 건당 라우팅 수수료(bps), 컴플라이언스 SaaS 구독, 환전 스프레드 셰어.</dd>
+        <dt>필요한 인프라</dt><dd>다중 체인 연동·수탁 연계, KYC/AML·Travel Rule 엔진, 실시간 준비자산·상환 모니터링, 예탁결제원/은행망 연계.</dd>
+        <dt>규제·실행 리스크</dt><dd>발행주체 미확정(은행 독점 시 라이선스 종속), 달러 스테이블코인 국내 유통 허용 여부, 자금세탁·자본유출 규제. → '중립 인프라'로 포지셔닝해 발행 경쟁을 회피하는 것이 리스크 최소화 전략.</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h4>🤔 오늘의 생각 질문</h4>
+      <div class="qbox">한은의 '예금토큰'과 민간의 '원화 스테이블코인'이 둘 다 상용화된다면, 사용자에게 이 둘은 <u>서로 다른 상품</u>일까 아니면 <u>같은 지갑 안의 잔액</u>일까? PM이라면 이 둘의 경계를 UX에서 어떻게 설계하고, 어느 쪽 수익모델에 베팅하겠는가?</div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    <b>주의 ·</b> 본 리포트는 공개 보도·1차 출처를 재구성한 요약이며 투자 자문이 아닙니다. Circle-카카오/토스, DB증권-옵티미즘 건은 모두 <b>MOU/파일럿 단계</b>로 실제 상용화·조건은 변동될 수 있어 "확인 필요". 사실과 분석·전망을 구분해 표기했으며, 수치는 보도 시점 기준입니다.
+  </div>
+
+  <footer>
+    📊 핀테크 모닝 리포트 · 조사 기준일(KST) <b>2026-07-24</b> · 데이터 기준 UTC 2026-07-23 22:04 / KST 2026-07-24 07:04<br/>
+    주제: 블록체인·스테이블코인 / RWA·토큰증권(STO) / CBDC·예금토큰 — 매일 아침 자동 발행
+  </footer>
+</div>
+
+<script>
+  // theme toggle
+  (function(){
+    var btn=document.getElementById('themebtn');
+    btn.addEventListener('click',function(){
+      var r=document.documentElement;
+      var cur=r.getAttribute('data-theme');
+      var next = cur==='dark' ? 'light' : (cur==='light' ? 'dark' :
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light':'dark'));
+      r.setAttribute('data-theme',next);
+    });
+  })();
+  // tabs
+  (function(){
+    var tabs=document.querySelectorAll('.tab');
+    var panels=document.querySelectorAll('.panel');
+    tabs.forEach(function(t){
+      t.addEventListener('click',function(){
+        var k=t.getAttribute('data-t');
+        tabs.forEach(function(x){x.classList.remove('active')});
+        t.classList.add('active');
+        panels.forEach(function(p){
+          p.classList.toggle('active', p.getAttribute('data-p')===k);
+        });
+        window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4,behavior:'smooth'});
+      });
+    });
+  })();
+</script>
+</body>
+</html>
