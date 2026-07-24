@@ -15,7 +15,7 @@ _"무슨 일이 일어났는가 → 왜 중요한가 → 어떤 사업 기회·�
 
 | 날짜 (KST) | 바로가기 |
 | :--- | :--- |
-| **2026-07-23** | [📄 리포트 열기](https://claude.ai/code/artifact/78c2c3e7-777b-4b9c-b7ad-c9f42ecdfe3b) |
+| **2026-07-24** | [📄 리포트 열기](https://happai079.github.io/Fintech-morning-report/reports/fintech-morning-report-20260724.html) |
 
 > 🔒 아티팩트는 기본적으로 **비공개**이며, 본인 Claude 계정으로 로그인해야 열립니다.
 > 공유하려면 아티팩트 페이지의 **Share** 메뉴에서 링크를 공개로 전환하세요.
