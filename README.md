@@ -55,7 +55,7 @@ _"무슨 일이 일어났는가 → 왜 중요한가 → 어떤 사업 기회·�
 .
 ├── README.md
 └── reports/
-    └── fintech-morning-report-2026-07-23.html
+    └── fintech-morning-report-20260723.html
 ```
 
 ---
