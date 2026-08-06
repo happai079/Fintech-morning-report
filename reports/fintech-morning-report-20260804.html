@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>핀테크 모닝 리포트 - 2026-08-04</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#1e2333; --sub:#5b6478; --line:#e8ebf3;
+    --brandA:#6b8afd; --brandB:#8b6bfd; --mint:#37c8a4; --amber:#f5a524; --rose:#f26d7d;
+    --chipbg:#eef1fe; --chipink:#4a5bd0; --hi:#fff4cf; --shadow:0 8px 24px rgba(40,48,80,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f1220; --card:#181c2e; --ink:#e9ecf6; --sub:#a3abc4; --line:#262c44;
+      --chipbg:#20264a; --chipink:#a9b6ff; --hi:#3a3517; --shadow:0 8px 24px rgba(0,0,0,.35);}
+  }
+  :root[data-theme="dark"]{ --bg:#0f1220; --card:#181c2e; --ink:#e9ecf6; --sub:#a3abc4; --line:#262c44;
+      --chipbg:#20264a; --chipink:#a9b6ff; --hi:#3a3517; --shadow:0 8px 24px rgba(0,0,0,.35);}
+  :root[data-theme="light"]{ --bg:#f6f7fb; --card:#ffffff; --ink:#1e2333; --sub:#5b6478; --line:#e8ebf3;
+      --chipbg:#eef1fe; --chipink:#4a5bd0; --hi:#fff4cf; --shadow:0 8px 24px rgba(40,48,80,.08);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",Roboto,sans-serif;
+    line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%}
+  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 80px}
+  header.top{background:linear-gradient(135deg,var(--brandA),var(--brandB));color:#fff;
+    border-radius:22px;padding:26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  header.top h1{margin:0 0 6px;font-size:1.55rem;letter-spacing:-.02em}
+  header.top .date{opacity:.95;font-size:.92rem;margin-top:4px}
+  .stamp{display:inline-block;background:rgba(255,255,255,.2);border-radius:999px;
+    padding:4px 12px;font-size:.78rem;margin-top:12px;backdrop-filter:blur(4px)}
+  .oneLiner{margin-top:16px;font-size:1.08rem;font-weight:700;line-height:1.6;
+    background:rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+  .themeToggle{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.22);
+    border:none;color:#fff;border-radius:999px;padding:7px 12px;font-size:.8rem;cursor:pointer}
+
+  nav.tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;
+    padding:12px 2px;margin:18px -2px 8px;background:var(--bg);scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--sub);
+    border-radius:999px;padding:9px 16px;font-size:.9rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:.15s}
+  nav.tabs button.active{background:linear-gradient(135deg,var(--brandA),var(--brandB));color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+
+  section.panel{display:none;animation:fade .3s ease}
+  section.panel.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:20px 20px;margin:14px 0;box-shadow:var(--shadow)}
+  .card h2{margin:.1em 0 .5em;font-size:1.15rem;letter-spacing:-.01em}
+  .card h3{margin:1.1em 0 .35em;font-size:1.02rem}
+  .lead{color:var(--sub);font-size:.95rem;margin-top:2px}
+  .chip{display:inline-block;background:var(--chipbg);color:var(--chipink);
+    border-radius:999px;padding:3px 11px;font-size:.8rem;font-weight:700;margin:3px 5px 3px 0}
+  .hi{background:var(--hi);padding:1px 6px;border-radius:6px;font-weight:700}
+  .num{font-weight:800;color:var(--brandA)}
+  :root[data-theme="dark"] .num,@media (prefers-color-scheme:dark){.num{color:#9db0ff}}
+  ul.tight{margin:.4em 0 .4em;padding-left:1.15em}
+  ul.tight li{margin:.28em 0}
+  .src{font-size:.82rem;color:var(--sub);margin-top:10px}
+  .src a{color:var(--chipink);text-decoration:none;border-bottom:1px dotted var(--chipink)}
+
+  .top3{display:grid;gap:12px;grid-template-columns:1fr}
+  @media(min-width:640px){.top3{grid-template-columns:repeat(3,1fr)}}
+  .t3{border-radius:16px;padding:16px;border:1px solid var(--line);background:var(--card)}
+  .t3 .rank{font-size:.78rem;font-weight:800;color:#fff;background:var(--brandB);
+    border-radius:999px;padding:2px 10px;display:inline-block;margin-bottom:8px}
+  .t3 b{display:block;font-size:1rem;margin-bottom:4px;line-height:1.45}
+  .t3 span{font-size:.86rem;color:var(--sub)}
+
+  .temp{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .gauge{font-size:1.05rem;font-weight:800}
+  .badge{border-radius:999px;padding:6px 16px;font-weight:800;font-size:.95rem;color:#fff}
+  .b-obs{background:var(--amber)} .b-up{background:var(--mint)} .b-warn{background:var(--rose)}
+
+  .analysis dt{font-weight:700;margin-top:.7em;color:var(--ink)}
+  .analysis dd{margin:.15em 0 .3em;color:var(--sub);font-size:.94rem}
+  .an-grid{display:grid;gap:6px 16px}
+  @media(min-width:620px){.an-grid{grid-template-columns:1fr 1fr}}
+  .conn{border-left:4px solid var(--mint);padding-left:14px;margin:.8em 0}
+  .idea{background:linear-gradient(135deg,rgba(107,138,253,.08),rgba(139,107,253,.08));
+    border:1px dashed var(--brandA);border-radius:14px;padding:16px 18px;margin-top:10px}
+  .q{font-size:1.05rem;font-weight:700;border-left:4px solid var(--amber);padding-left:14px}
+  footer{color:var(--sub);font-size:.82rem;text-align:center;margin-top:30px;line-height:1.6}
+  .kv{font-size:.9rem}.kv b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <button class="themeToggle" onclick="tgl()">🌗 테마</button>
+    <h1>📊 핀테크 모닝 리포트</h1>
+    <div class="date">조사 기준일(KST) · 2026년 8월 4일 (화)</div>
+    <span class="stamp">데이터 기준 시점 · UTC 2026-08-03 22:07 / KST 2026-08-04 07:07</span>
+    <div class="oneLiner">🧭 오늘의 한 줄 결론 — 스테이블코인은 "이자 금지(GENIUS Act)"로 유휴자금이 <b>토큰화 국채·RWA</b>로 빠져나가며 공급이 위축되는 한편, <b>Mastercard의 BVNK 인수 완료</b>로 제도권 결제 인프라가 스테이블코인을 흡수하기 시작했다 — 자산은 RWA로, 결제는 은행·카드망으로 재편되는 <b>'대(大)정렬'</b>의 신호다.</div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="active" data-t="summary">🏠 핵심 요약</button>
+    <button data-t="A">⛓️ 블록체인·스테이블코인</button>
+    <button data-t="B">🏛️ RWA·토큰증권</button>
+    <button data-t="C">🏦 CBDC</button>
+    <button data-t="connect">🔗 연결 분석</button>
+    <button data-t="pm">🎓 PM 학습</button>
+  </nav>
+
+  <!-- ===================== SUMMARY ===================== -->
+  <section class="panel show" data-p="summary">
+    <div class="card">
+      <h2>오늘 가장 중요한 변화 TOP 3</h2>
+      <div class="top3">
+        <div class="t3"><span class="rank">TOP 1</span>
+          <b>Mastercard, BVNK 18억 달러 인수 '완료'</b>
+          <span>대형 상장 결제망 최초로 스테이블코인 인프라를 '제휴'가 아닌 '내재화'. 연 <b>$30B</b> 처리·200+개국.</span></div>
+        <div class="t3"><span class="rank">TOP 2</span>
+          <b>스테이블코인 공급 3개월간 $15B 감소</b>
+          <span>Terra 사태 이후 최대폭. 원인은 붕괴가 아닌 <b>이자 금지→토큰화 국채로의 자금 이동</b>.</span></div>
+        <div class="t3"><span class="rank">TOP 3</span>
+          <b>한국, 디지털자산기본법 '연내' 재추진</b>
+          <span>원화 스테이블코인 제도화 담기지만 당·정·업계 이견으로 지연. 한은은 <b>예금토큰(프로젝트 한강 2단계)</b>로 승부.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>오늘의 시장 온도</h2>
+      <div class="temp">
+        <span class="badge b-obs">관찰</span>
+        <span class="gauge">상승 ← <b>[ 관찰 ]</b> → 경계</span>
+      </div>
+      <p class="lead" style="margin-top:12px">공급 지표(스테이블코인 총량)는 위축되고 있으나, 이는 규제로 인한 <b>자금의 질적 이동</b>이지 신뢰 붕괴가 아니다. 동시에 Mastercard·JPMorgan 등 <b>제도권 인프라 투자</b>가 가속 → 지표는 내려가고 인프라는 올라가는 엇갈림 국면. 방향은 명확하나 속도·주체가 재편 중이므로 '관찰'.</p>
+    </div>
+
+    <div class="card">
+      <h2>핀테크 PM이 오늘 알아야 할 키워드</h2>
+      <span class="chip">이자 금지(GENIUS Act) 리밸런싱</span>
+      <span class="chip">토큰화 국채(Tokenized Treasury)</span>
+      <span class="chip">예금토큰 vs 스테이블코인</span>
+      <span class="chip">결제망의 스테이블코인 내재화</span>
+      <span class="chip">통합원장(Unified Ledger)</span>
+    </div>
+  </section>
+
+  <!-- ===================== A ===================== -->
+  <section class="panel" data-p="A">
+    <div class="card">
+      <h2>① Mastercard, BVNK 인수 완료 — 결제 대기업의 스테이블코인 '내재화'</h2>
+      <p class="lead">2026-08-03 · 결제 인프라 / M&A</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>Mastercard가 스테이블코인 결제 인프라 스타트업 <b>BVNK 인수(18억 달러)를 8/3 완료</b>. 대형 상장 결제 네트워크가 스테이블코인 인프라를 제휴가 아닌 직접 소유로 확보한 첫 사례.</dd>
+        <dt>핵심 사실·수치</dt><dd>인수액 <span class="num">$1.8B</span> · BVNK 연환산 결제량 약 <span class="num">$30B</span>(2025년 통해 약 2.3배 성장) · <span class="num">200+</span>개 시장 커버.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>GENIUS Act로 스테이블코인이 제도권에 편입되자, 전통 결제망이 "위협"을 "자산"으로 재정의하고 <b>M&A로 흡수</b>하기 시작. 스테이블코인이 크립토 밖 <b>실물 결제 레일</b>로 이동하는 변곡점.</dd>
+        <dt>수혜자 / 리스크</dt><dd>수혜: Mastercard·기존 스테이블코인 인프라·B2B 크로스보더 결제. 리스크: 순수 스테이블코인 스타트업의 협상력 약화, Visa·PayPal의 추격 M&A로 인수가 과열.</dd></dl></div>
+      </div>
+      <h3>PM 관점 시사점</h3>
+      <p class="lead">스테이블코인의 승부처는 '발행'이 아니라 <b>'어디에 꽂히느냐(distribution)'</b>로 이동했다. PM이라면 자체 코인을 고민하기보다, 카드·정산·트레저리 워크플로에 스테이블코인 레일을 <b>임베드</b>하는 지점을 설계해야 한다.</p>
+      <p class="src">출처: Genfinity · Yahoo Finance / PYMNTS — <a href="https://finance.yahoo.com/markets/crypto/articles/banks-unveil-blockchain-network-stablecoin-211954629.html">Banks Unveil Blockchain Network as Stablecoin Payments Reach $33T</a>, <a href="https://www.pymnts.com/cryptocurrency/2026/stablecoins-turn-corporate-cash-into-working-inventory/">PYMNTS</a></p>
+    </div>
+
+    <div class="card">
+      <h2>② 스테이블코인 공급, 3개월간 $15B 감소 — Terra 이후 최대 축소</h2>
+      <p class="lead">2026-08-02 집계 · 시장 구조</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>총 스테이블코인 공급이 5월 중순 정점 이후 감소해 8/2 기준 약 <b>$307.6B</b>. 5월 정점(<b>$322.1B</b>) 대비 약 $15B 축소, 6월에만 약 $11.4B 증발 — TerraUSD(2022) 이후 최대 월간 감소.</dd>
+        <dt>핵심 원인</dt><dd>①<b>GENIUS Act 이자 지급 금지</b> → 이자 노리던 유휴자금이 토큰화 국채·MMF로 이동 ② Q2 크립토 가격 하락으로 거래 수요 둔화 ③ MiCA 비적격 토큰 거래소 제한.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>이번 감소는 <b>붕괴(de-peg)가 아니라 규제가 만든 자금의 질적 재배치</b>. "이자 없는 스테이블코인 vs 이자 주는 토큰화 국채"라는 구도가 시장을 갈랐다.</dd>
+        <dt>비즈니스 모델 의미</dt><dd>스테이블코인 발행사는 '준비금 이자 독식' 모델이 규제로 막히자, 부가 서비스(결제·수탁·FX)에서 수익을 찾아야 하는 압박. 이자는 RWA 상품으로 넘어간다.</dd></dl></div>
+      </div>
+      <p class="src">출처: Bitcoin.com · Cryptonews — <a href="https://news.bitcoin.com/stablecoins/stablecoin-supply-sheds-15-billion-in-biggest-drop-since-terra/">Stablecoin Supply Sheds $15B in Biggest Drop Since Terra</a>, <a href="https://libertystreeteconomics.newyorkfed.org/2026/07/stablecoins-and-noncrypto-shocks-a-2026-update/">NY Fed Liberty Street</a></p>
+    </div>
+
+    <div class="card">
+      <h2>③ 한국 원화 스테이블코인 — 디지털자산기본법 '연내' 재추진, 그러나 이견</h2>
+      <p class="lead">2026년 하반기 · 국내 제도</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>정부·금융위가 하반기 <b>디지털자산기본법</b> 입법을 재추진. 발행 인가제·준비자산 보유·상환청구권·공시 등 투자자 보호 장치와 <b>원화 스테이블코인 제도화</b> 포함 예정.</dd>
+        <dt>핵심 사실</dt><dd>다만 거래소 대주주 지분 제한·발행 구조를 둘러싼 <b>당·정·업계 이견</b>이 지속. 4월 정무위 법안소위 무산 이후 논의가 사실상 정체 → 업계는 "연내 통과 사실상 어렵다"는 시각.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>달러 스테이블코인이 GENIUS Act로 질주하는 사이 원화 대응이 늦어지면 <b>디지털 통화 주권·결제 데이터가 달러망에 종속</b>될 우려. 속도가 곧 리스크.</dd>
+        <dt>후속 확인 이벤트</dt><dd>①정무위 법안소위 재개 일정 ②은행권 컨소시엄 vs 비은행 발행 구조 결정 ③한은-금융위 관할권 정리.</dd></dl></div>
+      </div>
+      <p class="src">출처: 뉴스1 · 데일리안 · 아시아경제 — <a href="https://www.news1.kr/finance/blockchain-fintech/6235654">"디지털자산 기본법, 연내 꼭 발의"</a>, <a href="https://www.dailian.co.kr/news/view/1667140/">금융위 업무보고</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== B ===================== -->
+  <section class="panel" data-p="B">
+    <div class="card">
+      <h2>① 글로벌 RWA 온체인 규모 $20B~$32B — 토큰화 국채가 주도</h2>
+      <p class="lead">2026 상반기 누적 · 시장 데이터</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>실물자산(RWA) 토큰화 온체인 가치가 <b>$20B 돌파(집계에 따라 $27~32B)</b>, 전년비 약 3배. 7,000+개 상품·12개 자산군.</dd>
+        <dt>핵심 수치</dt><dd>토큰화 미국채 ~<span class="num">$15B</span>(100개 자산, 16개가 개별 $100M+) · 시장의 약 <b>45%</b>가 국채 · BlackRock BUIDL <span class="num">$2.4B</span>(수익률 ~4.4%) · Ondo AUM <span class="num">$2.4B</span>(비미국 보유자 ~4.7%).</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>스테이블코인에서 빠진 유휴자금의 <b>1차 종착지가 토큰화 국채</b>. "온체인에서 이자 받는 안전자산"이라는 새 카테고리가 스테이블코인의 기능 일부를 대체 중.</dd>
+        <dt>수혜 / 리스크</dt><dd>수혜: BlackRock·Franklin·Ondo·Securitize. 리스크: 가치의 <b>97%가 미국 리테일 밖</b>에 묶여 수탁·거래소가 '게이트키퍼' 병목. 접근성이 확장의 관건.</dd></dl></div>
+      </div>
+      <p class="src">출처: CoinGecko · Yellow.com · Chainalysis — <a href="https://yellow.com/research/real-world-asset-tokenization-20-billion-record">RWA Tokenization Crosses $20B</a>, <a href="https://www.coingecko.com/research/publications/rwa-report-2026">CoinGecko RWA Report 2026</a></p>
+    </div>
+
+    <div class="card">
+      <h2>② Securitize NYSE 상장 · 토큰화 주식은 최고 성장 카테고리</h2>
+      <p class="lead">2026-07-02 · 인프라</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>RWA 발행 인프라 대표주자 <b>Securitize가 7/2 NYSE 거래 개시</b>(사업결합 완료), 자사 보통주를 퍼블릭 체인에 발행. 상장 시점 토큰화 주식 약 $266~295M.</dd>
+        <dt>핵심 흐름</dt><dd>국채가 지배적(45%)이나 <b>토큰화 주식이 최고 성장 신(新)카테고리</b>. MEXC는 6/25 Ondo와 토큰화 주식 5종 페어 추가 등 거래 메뉴 확장.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>"발행 인프라 회사"가 직접 상장·온체인 발행 → 토큰증권이 <b>실험을 넘어 자본시장 표준 상품</b>으로 넘어가는 신호.</dd>
+        <dt>PM 시사점</dt><dd>발행(issuance)은 이미 되고 있다. 남은 병목은 <b>유통·수탁·투자자 접근</b>. 여기서 PM이 풀 문제가 가장 크다.</dd></dl></div>
+      </div>
+      <p class="src">출처: InvestaX · Yahoo Finance — <a href="https://investax.io/blog/q1-2026-real-world-asset-tokenization-market-report">Q1 2026 RWA Market Report</a>, <a href="https://finance.yahoo.com/markets/crypto/articles/reality-rwa-tokenization-2026-only-131856773.html">Reality of RWA Tokenization 2026</a></p>
+    </div>
+
+    <div class="card">
+      <h2>③ 국내 STO — 증권사들, 인가 전 '판 짜기' 경쟁 (채권·MMF로 확장)</h2>
+      <p class="lead">2026-07 · 국내 시장</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>법 시행 전임에도 증권사들이 계좌관리·수탁·발행·유통 체계 선점에 착수. <b>NH투자증권 디지털자산 TFT 신설</b>, <b>신한투자증권</b>은 Canton 개발사 Digital Asset에 투자, <b>KB·미래에셋·NH</b>는 토큰증권 컨소시엄 구성.</dd>
+        <dt>확장 방향</dt><dd>준비 범위가 조각투자(부동산·미술품)를 넘어 <b>채권·MMF·펀드 등 정형 금융자산</b>으로 확대 — 다음 격전지는 채권·MMF.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>글로벌 RWA의 주력(국채·MMF)과 국내 증권사 확장 방향이 <b>정확히 일치</b>. 제도만 열리면 즉시 상품화될 파이프라인이 쌓이는 중.</dd>
+        <dt>후속 확인 이벤트</dt><dd>①자본시장법·전자증권법 개정 시행 시점 ②장외 유통 플랫폼(디지털증권시장) 인가 ③기관 vs 리테일 개방 범위.</dd></dl></div>
+      </div>
+      <p class="src">출처: 아시아투데이 · 이데일리 · 삼일PwC — <a href="https://www.asiatoday.co.kr/kn/view.php?key=20260728010010336">STO 문 열리기 전 판 짠다</a>, <a href="https://marketin.edaily.co.kr/News/Read?newsId=06638726645510256">STO 다음 격전지는 채권·MMF</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== C ===================== -->
+  <section class="panel" data-p="C">
+    <div class="card">
+      <h2>① 한국은행 '프로젝트 한강' 2단계 — 예금토큰으로 승부수</h2>
+      <p class="lead">2026 하반기 실거래 예정 · 국내 CBDC/예금토큰</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>한은 CBDC 실증 <b>프로젝트 한강 2단계</b> 시동. 예금토큰 지갑 한도를 10만→<b>50만 개</b>로 확대, 지갑 보유한도 <b>1,000만원</b>, 송금·생체인증·자동전환 기능 추가. BNK경남·iM뱅크 신규 합류로 참여 은행 <b>9곳</b>.</dd>
+        <dt>핵심 배경</dt><dd>1단계의 "쓸 곳이 없다"는 지적에 대응해 편의점 등 실사용처를 대폭 확대. 하반기 <b>실거래 테스트</b> 예정.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>한은은 민간 스테이블코인보다 <b>기관용 CBDC + 예금토큰</b>을 결제 인프라의 축으로 삼는 노선. 국내 디지털 통화 아키텍처의 방향타.</dd>
+        <dt>PM 시사점</dt><dd>국내에서 "원화 디지털 결제"의 기본 레일이 <b>은행 예금토큰</b>이 될 가능성 → 핀테크는 그 위에 UX·부가서비스를 얹는 전략이 현실적.</dd></dl></div>
+      </div>
+      <p class="src">출처: 디지털타임스 · 헤럴드경제 · 블록미디어 — <a href="https://www.dt.co.kr/article/12073176">한은 CBDC '프로젝트 한강' 2단계 시동</a>, <a href="https://biz.heraldcorp.com/article/10823002">BNK경남은행 참여</a></p>
+    </div>
+
+    <div class="card">
+      <h2>② 신현송 총재의 '통합원장' 구상 — CBDC·예금토큰·토큰화 국채의 결합</h2>
+      <p class="lead">2026-07 · 정책 담론</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd>신현송 한은 총재, "기관용 CBDC + 상업은행 예금토큰 + 토큰화 국채를 <b>하나의 통합원장(Unified Ledger)</b>에서 운영하는 미래 화폐체계" 제안. "원화 스테이블코인 조속 도입" 입장은 유지.</dd>
+        <dt>핵심 메시지</dt><dd>스테이블코인과 예금토큰은 <b>경쟁·보완 공존</b>하되, 안정성 측면에서 CBDC·예금토큰이 우위라는 관점.</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>미국(민간 스테이블코인 주도)과 대비되는 <b>한국형 은행 중심 모델</b>의 청사진. RWA·스테이블코인·CBDC를 한 판에 올리는 아키텍처 논쟁의 핵심.</dd>
+        <dt>후속 확인</dt><dd>①기관용 CBDC 상용화 로드맵 ②통합원장 표준·거버넌스 주체 ③국제결제은행(BIS) 프로젝트와의 연계.</dd></dl></div>
+      </div>
+      <p class="src">출처: TokenPost · 헤럴드경제 — <a href="https://www.tokenpost.kr/news/blockchain/359540">한은 "CBDC·예금토큰이 안정적"</a>, <a href="https://biz.heraldcorp.com/article/10803711">신현송 총재 발언</a></p>
+    </div>
+
+    <div class="card">
+      <h2>③ 글로벌 CBDC — 러시아 디지털루블 전국 상용화 임박, 중국 e-CNY 성격 전환</h2>
+      <p class="lead">2026 · 글로벌 동향</p>
+      <div class="analysis an-grid">
+        <div><dl><dt>무엇이 일어났나</dt><dd><b>러시아</b>: 디지털루블 전국 상용화 목표 <b>2026년 9월</b>(파일럿 15,000명·30개 은행). <b>중국</b>: 1월 e-CNY를 '예금성 부채'로 재분류 — 디지털 현금에서 예금적 성격으로 이동 신호. <b>139개국+</b>가 CBDC 개발·검토 중.</dd>
+        <dt>기타</dt><dd>르완다 12개월 파일럿(USSD 기반 금융소외층 겨냥), 인도 주최 BRICS 정상회의서 회원국 디지털통화 연계 제안(국경 간 결제).</dd></dl></div>
+        <div><dl><dt>왜 지금 중요한가</dt><dd>CBDC가 '실험'에서 <b>'상용·국경간 결제'</b> 국면으로. 중국의 성격 전환은 CBDC와 예금토큰의 경계가 흐려지는 글로벌 흐름을 보여줌.</dd>
+        <dt>리스크</dt><dd>국경 간 CBDC 연계는 <b>달러 결제망 우회</b> 지정학 이슈 동반. 프라이버시·감시 논쟁도 상용화 변수.</dd></dl></div>
+      </div>
+      <p class="src">출처: Atlantic Council · Cointelegraph · CBDC Tracker — <a href="https://www.atlanticcouncil.org/cbdctracker/">Atlantic Council CBDC Tracker</a>, <a href="https://cointelegraph.com/tags/cbdc">Cointelegraph CBDC</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== CONNECT ===================== -->
+  <section class="panel" data-p="connect">
+    <div class="card">
+      <h2>🔗 오늘의 연결 분석</h2>
+
+      <div class="conn">
+        <h3>연결 ① 스테이블코인 ↔ RWA(토큰화 국채) — "이자의 이동"</h3>
+        <p class="lead">GENIUS Act가 스테이블코인의 <b>이자 지급을 금지</b>하자, 이자를 노리던 유휴자금이 <b>토큰화 국채·MMF</b>로 이동. 스테이블코인 공급이 $15B 줄어드는 동안 RWA는 $20B+로 3배 성장했다. 두 지표는 <b>서로 반대로 움직이는 게 아니라 같은 자금의 앞뒷면</b>이다. 즉 스테이블코인은 '결제·이동 수단'으로, RWA는 '온체인 이자 자산'으로 <b>기능 분화</b>가 진행 중.</p>
+        <p class="lead">👉 <b>PM 함의</b>: "스테이블코인에 넣어두면 이자"가 막힌 지금, <b>스테이블코인(결제) + 토큰화 국채(수익)를 자동 스위칭</b>하는 온체인 캐시 매니지먼트가 빈 공간이다.</p>
+      </div>
+
+      <div class="conn">
+        <h3>연결 ② 스테이블코인 ↔ CBDC·예금토큰 — "누가 결제 레일을 쥐는가"</h3>
+        <p class="lead">미국은 <b>민간 스테이블코인</b>이 앞서고(Mastercard-BVNK, JPM·Citi·BofA 예금토큰망은 오히려 이에 대한 <b>은행권 반격</b>, 2027 상반기 목표), 한국은 한은이 <b>예금토큰(프로젝트 한강)</b>을 축으로 은행 중심 모델을 밀고 있다. 같은 "토큰화된 돈"이지만 <b>발행 주체(민간 vs 은행 vs 중앙은행)</b>를 놓고 국가별로 다른 진영이 형성된다.</p>
+        <p class="lead">👉 <b>PM 함의</b>: 한국 진출 서비스는 '스테이블코인 먼저'가 아니라 <b>은행 예금토큰 레일 위에서의 UX·부가서비스</b>로 접근하는 게 규제 정합성이 높다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PM ===================== -->
+  <section class="panel" data-p="pm">
+    <div class="card">
+      <h2>🎓 오늘의 PM 인사이트</h2>
+      <p>오늘의 뉴스를 하나로 꿰면 <b>"이자·결제·안전성의 재정렬"</b>이다.
+      <b>고객</b>(기업 트레저리·크로스보더 결제 사용자)은 <b>문제</b>(유휴 현금은 이자를 받고 싶고, 결제는 24/7 즉시 처리되길 원함)를 갖는데, 규제(GENIUS Act 이자 금지)가 이 둘을 하나의 스테이블코인 안에서 해결하지 못하게 갈라놓았다.
+      그 결과 <b>가치</b>는 "결제는 스테이블코인/예금토큰, 수익은 토큰화 국채"로 분리되고, <b>수익모델</b>도 발행사의 준비금 이자 독식에서 → 결제·수탁·FX·스위칭 서비스로 이동한다.
+      <b>경쟁구도</b>는 카드망(Mastercard)·은행연합(JPM 등)·중앙은행(한은)이 각자 "토큰화된 돈"의 레일을 선점하려는 3파전. PM은 이 재정렬의 <b>경계면(결제↔수익, 민간↔은행)</b>에서 마찰이 큰 지점을 찾아야 한다.</p>
+    </div>
+
+    <div class="card">
+      <h2>💡 오늘의 사업 아이디어</h2>
+      <div class="idea">
+        <h3>온체인 '스마트 트레저리' — 결제잔액 자동 이자화 API</h3>
+        <ul class="tight">
+          <li><b>고객</b>: 스테이블코인으로 대금을 주고받는 글로벌 B2B/커머스·핀테크 기업의 재무팀.</li>
+          <li><b>고객의 문제</b>: 결제용으로 보유한 스테이블코인은 이자가 0(규제). 그렇다고 국채 상품에 넣으면 결제 즉시성이 사라진다. 결제 유동성과 수익을 동시에 못 잡음.</li>
+          <li><b>핵심 해결책</b>: 결제 대기 잔액을 실시간으로 <b>토큰화 국채(BUIDL·USDY 등)에 자동 예치→결제 필요 시 초 단위 상환</b>하는 스위칭 엔진. "잔액은 항상 이자를 벌되, 결제 순간엔 스테이블코인"으로 존재.</li>
+          <li><b>수익모델</b>: 스위칭 운용 수수료(bps) + 국채 이자 스프레드 공유 + 기업용 대시보드 SaaS 구독.</li>
+          <li><b>필요 인프라</b>: 토큰화 국채 발행사 API, 스테이블코인 온·오프램프, 실시간 리스크·유동성 엔진, 수탁 파트너.</li>
+          <li><b>규제·실행 리스크</b>: '자동 예치'가 이자 우회로 해석될 소지(GENIUS Act) → 상품을 발행사가 아닌 <b>독립 자산운용/브로커</b> 구조로 분리 설계 필요. 국가별 증권·수탁 인가 상이.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>❓ 오늘의 생각 질문</h2>
+      <p class="q">"결제의 즉시성과 자산의 수익성이 규제로 분리된 지금, 우리 서비스는 고객의 돈을 <b>어느 순간에 스테이블코인으로, 어느 순간에 토큰화 국채로</b> 존재하게 할 것인가? 그 스위칭의 마찰을 없애는 것이 우리의 해자가 될 수 있는가?"</p>
+    </div>
+  </section>
+
+  <footer>
+    본 리포트는 공개 웹 정보를 조사·재구성한 것으로 투자 자문이 아닙니다. 수치·일정은 원문 확인을 권장합니다.<br>
+    <span class="kv"><b>조사 기준일(KST)</b> 2026-08-04 · <b>데이터 기준 시점</b> UTC 2026-08-03 22:07 / KST 2026-08-04 07:07</span><br>
+    📊 핀테크 모닝 리포트 · 블록체인/스테이블코인 · RWA/토큰증권 · CBDC
+  </footer>
+</div>
+
+<script>
+  var tabs=document.getElementById('tabs');
+  tabs.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    [].forEach.call(tabs.querySelectorAll('button'),function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    var t=b.getAttribute('data-t');
+    [].forEach.call(document.querySelectorAll('section.panel'),function(p){
+      p.classList.toggle('show',p.getAttribute('data-p')===t);
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  function tgl(){
+    var r=document.documentElement;
+    var cur=r.getAttribute('data-theme');
+    if(!cur){ cur = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; }
+    r.setAttribute('data-theme', cur==='dark'?'light':'dark');
+  }
+</script>
+</body>
+</html>
