@@ -15,7 +15,7 @@ _"무슨 일이 일어났는가 → 왜 중요한가 → 어떤 사업 기회·�
 
 | 날짜 (KST) | 바로가기 |
 | :--- | :--- |
-| **2026-07-30** | [📄 리포트 열기](https://happai079.github.io/Fintech-morning-report/reports/fintech-morning-report-20260730.html) |
+| **2026-08-06** | [📄 리포트 열기](https://happai079.github.io/Fintech-morning-report/reports/fintech-morning-report-20260806.html) |
 
 ---
 
